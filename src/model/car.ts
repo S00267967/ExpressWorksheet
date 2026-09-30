@@ -1,14 +1,24 @@
 import { Schema, model } from 'mongoose';
+import { z } from 'zod';
 
 export interface ICar {
   make: string;
   model: string;
+  year?: number;
+
 }
+export const carZodSchema = z.object({
+  make: z.string().max(100),
+  model: z.string().max(100),
+  year: z.number().min(1950).optional()
+});
+
 
 const carSchema = new Schema<ICar>(
   {
     make: { type: String, required: true },
     model: { type: String, required: true },
+    year: { type: Number, min: 1950, required: false },
   },
   { timestamps: true }
 );
