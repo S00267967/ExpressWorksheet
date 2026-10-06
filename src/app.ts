@@ -3,12 +3,15 @@ import carRoutes from './routes/cars';
 import { env } from "./config/env";
 import { connectDB } from "./config/database";
 import {authenticateKey} from './middleware/auth.middleware';
+import { swaggerSpec } from "./config/swagger";
+import swaggerUi from 'swagger-ui-express';
 
 
 const PORT = env.port; 
 const app: Application = express(); 
 
 app.use(express.json());
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
     console.log('Request body:', request.body);
 app.use('/api/v1/cars', authenticateKey, carRoutes);
 app.use((req, _res, next) => { 
