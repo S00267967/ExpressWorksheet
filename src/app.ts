@@ -1,46 +1,21 @@
-import express, {Application, request, Request, Response} from "express" ; 
+import express, { Application, Request, Response } from "express";
 import carRoutes from './routes/cars';
-import { env } from "./config/env";
-import { connectDB } from "./config/database";
-import {authenticateKey} from './middleware/auth.middleware';
+import { authenticateKey } from './middleware/auth.middleware';
 import { swaggerSpec } from "./config/swagger";
 import swaggerUi from 'swagger-ui-express';
 
-
-const PORT = env.port; 
-const app: Application = express(); 
+export const app: Application = express();
 
 app.use(express.json());
-app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
-    console.log('Request body:', request.body);
+
+app.use((req, _res, next) => {
+    console.log(`${req.method} ${req.originalUrl}`);
+    next();
+});
+
+app.get("/ping", (_req: Request, res: Response) => {
+    res.json({ message: "hello from Una" });
+});
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/v1/cars', authenticateKey, carRoutes);
-app.use((req, _res, next) => { 
-    console.log(`${req.method} ${req.originalUrl}`); 
-    next(); 
-}); 
-const startServer = async () => {
-  await connectDB();
-
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT  }`);
-  });
-
-};
-
-startServer(); 
-/***
- * app.use(express.json());
-    console.log('Request body:', request.body);
-
-app.get("/ping", async (_req : Request, res: Response) => { 
-    res.json({ 
-        message: "Hello, Message! I am the god of the application." }); }); 
-        app.listen(PORT, () => { 
-app.get('/templeOS', async (_req : Request, res: Response) => { 
-    res.json({ 
-        message: "I am Rasta the Pasta", 
-    }); 
-
-}); 
- 
- */

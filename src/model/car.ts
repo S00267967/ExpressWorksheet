@@ -28,8 +28,8 @@ export interface ICar {
  *           example: 2010
  */
 export const carZodSchema = z.object({
-  make: z.string().max(100),
-  model: z.string().max(100),
+  make: z.string().min(1).max(100),
+  model: z.string().min(1).max(100),
   year: z.number().min(1950).optional()
 });
  
