@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "test": "vitest run",
-  "test:watch": "vitest",
-  "build": "tsc",
-  "start": "node build/src/server.js",
-  "dev": "tsx watch src/server.ts",
-  "typecheck": "tsc --noEmit"
-},
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc",
+    "start": "node build/src/server.js",
+    "dev": "tsx watch src/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
+    "cors": "^2.8.6",
     "dotenv": "^18.0.3",
     "express": "^5.2.1",
     "mongoose": "^9.10.3",
@@ -26,6 +27,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^22.20.5",
     "@types/supertest": "^7.2.1",

@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import carRoutes from './routes/cars';
 import { authenticateKey } from './middleware/auth.middleware';
 import { swaggerSpec } from "./config/swagger";
@@ -6,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 
 export const app: Application = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use((req, _res, next) => {
